@@ -26,7 +26,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="315">
   </a>
 
   <h3 align="center">Project 4: Around The U.S.</h3>
@@ -34,10 +34,10 @@
   <p align="center">
     adaptive site creation (JS, CSS, HTML)
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="hhttps://github.com/AVilentchuk/web_project_4"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View on github pages</a>
+    <a href="https://avilentchuk.github.io/web_project_4/">View on github pages</a>
     ·
     <a href="https://github.com/AVilentchuk/web_project_4/issues">Report Bug</a>
     ·
