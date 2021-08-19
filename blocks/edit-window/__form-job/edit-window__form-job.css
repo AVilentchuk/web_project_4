@@ -1,4 +1,8 @@
 .edit-window__form-job {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
   border: none;
   padding: 0;
   margin: 30px auto 0;
