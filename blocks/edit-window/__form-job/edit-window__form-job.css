@@ -1,0 +1,6 @@
+.edit-window__form-job {
+  border: none;
+  padding: 0;
+  margin: 30px auto 0;
+  width: clamp(238px, 28vw, 358px);
+}

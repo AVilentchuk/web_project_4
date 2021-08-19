@@ -1,0 +1,7 @@
+.profile__name {
+  grid-area: profile-n;
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(24px, 3.3vw, 42px);
+  line-height: clamp(27px, 3.75vw, 48px);
+}

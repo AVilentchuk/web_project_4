@@ -1,0 +1,10 @@
+.edit-window__form-name {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  padding: 0;
+  margin: 54px auto 0;
+  width: clamp(238px, 28vw, 358px);
+}

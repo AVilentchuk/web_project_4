@@ -1,0 +1,11 @@
+.button__edit {
+  margin-left: clamp(10px, 0.78vw, 18px);
+  align-self: center;
+  grid-area: profile-b;
+  border-width: 1px;
+  width: clamp(18px, 2vw, 24px);
+  height: clamp(18px, 2vw, 24px);
+  background: black url("../../../assets/icons/Edit\ Button.svg")
+    center/clamp(7.5px, 43%, 10px) no-repeat;
+  transition: opacity 0.2s ease-in-out;
+}
