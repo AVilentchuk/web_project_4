@@ -25,7 +25,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/AVilentchuk/">
     <img src="assets/logo.png" alt="Logo" width="315">
   </a>
 
