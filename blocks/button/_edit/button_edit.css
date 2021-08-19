@@ -1,4 +1,4 @@
-.button__edit {
+.button_edit {
   margin-left: clamp(10px, 0.78vw, 18px);
   align-self: center;
   grid-area: profile-b;

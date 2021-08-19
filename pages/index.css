@@ -8,10 +8,10 @@
 @import url("../blocks/header/__logo/header__logo.css");
 @import url("../blocks/header/__sep-line/header__sep-line.css");
 @import url("../blocks/button/button.css");
-@import url("../blocks/button/__add/button__add.css");
-@import url("../blocks/button/__edit/button__edit.css");
-@import url("../blocks/button/__close/button__close.css");
-@import url("../blocks/button/__submit/button__submit.css");
+@import url("../blocks/button/_add/button_add.css");
+@import url("../blocks/button/_edit/button_edit.css");
+@import url("../blocks/button/_close/button_close.css");
+@import url("../blocks/button/_submit/button_submit.css");
 @import url("../blocks/profile/profile.css");
 @import url("../blocks/profile/profile__photo/profile__photo.css");
 @import url("../blocks/profile/profile__description/profile__description.css");
@@ -28,6 +28,6 @@
 @import url("../blocks/edit-window/__form-job/edit-window__form-job.css");
 @import url("../blocks/edit-window/__name/edit-window__name.css");
 @import url("../blocks/edit-window/__job/edit-window__job.css");
-@import url("../blocks/edit-window/__mask/edit-window__mask.css");
+@import url("../blocks/page/__mask/page__mask.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__about/footer__about.css");

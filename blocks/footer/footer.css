@@ -1,11 +1,12 @@
-footer {
+.footer {
   margin: 0 auto 0 200px;
   width: clamp(282px, 68.8%, 880px);
   padding-bottom: clamp(36px, 5%, 60px);
 }
 
 @media screen and (max-width: 676px) {
-  footer {
+  .footer {
     margin: 0 auto;
   }
 }
+

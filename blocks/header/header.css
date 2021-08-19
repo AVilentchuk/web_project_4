@@ -1,4 +1,4 @@
-header {
+.header {
   margin: 0 auto;
   width: clamp(282px, 100%, 880px);
 }
