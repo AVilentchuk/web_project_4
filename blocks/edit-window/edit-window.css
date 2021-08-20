@@ -1,10 +1,7 @@
 .edit-window {
-  visibility: collapse;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 50vw;
-  transform: translateX(-50%);
+  position: relative;
   width: clamp(282px, 35vw, 430px);
   background: white;
   border-radius: 10px;

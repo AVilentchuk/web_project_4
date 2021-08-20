@@ -7,5 +7,6 @@
   height: clamp(18px, 2vw, 24px);
   background: black url("../../../assets/icons/Edit\ Button.svg")
     center/clamp(7.5px, 43%, 10px) no-repeat;
+  border: 1px solid #fff;
   transition: opacity 0.2s ease-in-out;
 }

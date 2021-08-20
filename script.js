@@ -1,33 +1,31 @@
-let editWindow = document.querySelector(".edit-window");
 let editButton = document.querySelector(".button_edit");
+let submitButton = document.querySelector(".button_submit");
+let closeButton = document.querySelector(".edit-window__button-close");
+let popupBack = document.querySelector(".popup");
+let form = document.querySelector(".edit-window__form");
+let curName = document.querySelector(".profile__name");
+let curJob = document.querySelector(".profile__job");
+let newName = document.getElementById("name");
+let newJob = document.getElementById("job-des");
 
-// console.log(editWindow.style.visibility);
-// console.log(editButton);
+editButton.addEventListener("click", openEdit);
+newName.value = curName.textContent;
+newJob.value = curJob.textContent;
+
 function openEdit() {
-  let submitButton = editWindow.querySelector('.button_submit');
-  let closeButton = editWindow.querySelector('.button_close');
-  let profileName = document.querySelector('.profile__name');
-  let profileJob = document.querySelector('.profile__about');
-  let editName = document.querySelector('.edit-window__name');
-  let editJob = document.querySelector('.edit-window__job');
 
-  editName.value = profileName.textContent;
-  editJob.value = profileJob.textContent;
-
-  editWindow.style.visibility = "visible";
-  document.querySelector('.page__mask').style.visibility = "visible";
-
-  closeButton.addEventListener('click', function () {
-    document.querySelector('.page__mask').style.visibility = "hidden";
-    editWindow.style.visibility = "hidden";
+  popupBack.classList.add("popup_active");
+  closeButton.addEventListener("click", function closeClick() {
+    popupBack.classList.remove("popup_active");
+    closeButton.removeEventListener("click", closeClick);
   });
-  submitButton.addEventListener('click',function () {
-    profileName.textContent = editName.value;
-    profileJob.textContent = editJob.value;
-    editWindow.style.visibility = "hidden";
-    document.querySelector('.page__mask').style.visibility = "hidden";
-  })
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+     curName.textContent = newName.value;
+    curJob.textContent = newJob.value;
+    popupBack.classList.remove("popup_active")
+  });
 }
 
 
-editButton.addEventListener('click', openEdit);

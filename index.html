@@ -18,24 +18,28 @@
       <img class="profile__photo" src="assets/images/avatar_photo.png" alt="profile photo of user">
     <div class="profile__description">
       <h2 class="profile__name">Jacques Cousteau</h2>
-      <button class="button button_edit"></button>
-      <p class="profile__about">Explorer</p>
+      <button class="button button_edit" type="button"></button>
+      <p class="profile__job">Explorer</p>
     </div>
 
-    <button class="button button_add"></button>
+    <button class="button button_add" type="button"></button>
     </section>
-    <div class="page__mask"></div>
-    <div class="edit-window">
-      <button class="button button_close"></button>
-      <h2 class="edit-window__title">Edit Profile</h2>
-      <fieldset class="edit-window__form-name">
-        <input class="edit-window__name" type="text" id="name" placeholder="Insert name here...">
-      </fieldset>
-      <fieldset class="edit-window__form-job">
-        <input class="edit-window__job"  type="text" id="job-des" placeholder="Insert job here...">
-      </fieldset>
-      <button class="button button_submit" type="submit">Save</button>
+    <div class="popup">
+      <div class="edit-window">
+        <button class="button edit-window__button-close" type="button"></button>
+        <h2 class="edit-window__title">Edit Profile</h2>
+        <form class="edit-window__form" name="editWindow">
+          <div>
+          <input class="edit-window__name" type="text" id="name" placeholder="Insert name here..." required>
+        </div>
+        <div>
+          <input class="edit-window__job" type="text" id="job-des" placeholder="Insert job here...">
+        </div>
+        <button class="button button_submit" type="submit">Save</button>
+      </form>
+      </div>
     </div>
+
     <section class="locations">
       <div class="card">
         <img src="assets/images/image_unsplash_yosemite-valley.png" alt="photo of yosemite valley" class="card__image">
@@ -54,7 +58,7 @@
       </div>
 
       <div class="card">
-        <img src="assets/images/image_unsplash_bald-mountians.png" alt="photo of bald mountians" class="card__image">
+        <img src="assets/images/image_unsplash_bald-mountains.png" alt="photo of bald mountains" class="card__image">
         <div class="card__footer">
           <h2 class="card__text">Bald Mountains</h2>
          <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">

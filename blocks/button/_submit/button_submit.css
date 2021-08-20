@@ -10,4 +10,5 @@
   font-size: clamp(14px, 1.4vw, 18px);
   line-height: clamp(17px, 1.72vw, 22px);
   text-align: center;
+  border:0;
 }
