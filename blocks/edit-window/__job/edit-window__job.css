@@ -1,6 +1,0 @@
-.edit-window__job {
-  margin-top: 30px;
-  width: clamp(238px, 28vw, 358px);
-  border-style: none;
-  border-bottom: #ececec solid 1px;
-}

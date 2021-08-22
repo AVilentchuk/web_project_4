@@ -1,4 +1,4 @@
-.edit-window__button-close {
+.button_popup_close {
   position: absolute;
   top: -34px;
   right: -34px;
@@ -10,7 +10,7 @@
   transition: transform 0.2s ease-in-out;
 }
 @media screen and (max-width: 676px) {
-  .edit-window__button-close  {
+  .button_popup_close {
     transform: translate(-40px, 0px) rotate(-45deg);
   }
 }

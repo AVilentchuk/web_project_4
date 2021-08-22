@@ -1,5 +1,6 @@
 .profile__description {
   margin-left: clamp(0px, (4.7vw - 30px), 30px);
+  align-self: center;
   grid-area: desc;
   display: grid;
   grid-template-areas:

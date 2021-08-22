@@ -1,0 +1,5 @@
+.profile__photo {
+  grid-area: img;
+  width: 120px;
+  border-radius: 100%;
+}

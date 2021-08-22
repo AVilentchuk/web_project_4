@@ -1,4 +1,4 @@
-.edit-window__title {
+.popup__title {
   width: clamp(238px, 28vw, 358px);
   margin: 34px auto 0;
   font-style: normal;

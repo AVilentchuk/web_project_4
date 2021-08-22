@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,94 +8,96 @@
   <link rel="stylesheet" href="pages/index.css">
   <title>Around The U.S.</title>
 </head>
+
 <body class="page">
   <div class="page__wrap">
-  <header class="header">
-    <img class="header__logo" src="assets/icons/Logo__vector.svg" alt="site's logo">
-    <div class="header__sep-line"></div>
-  </header>
-  <main>
-    <section class="profile">
-      <img class="profile__photo" src="assets/images/avatar_photo.png" alt="profile photo of user">
-    <div class="profile__description">
-      <h2 class="profile__name">Jacques Cousteau</h2>
-      <button class="button button_edit" type="button"></button>
-      <p class="profile__job">Explorer</p>
-    </div>
+    <header class="header">
+      <img class="header__logo" src="assets/icons/Logo__vector.svg" alt="site's logo">
+    </header>
+    <main>
+      <section class="profile">
+        <img class="profile__photo" src="assets/images/avatar_photo.png" alt="profile photo of user">
+        <div class="profile__description">
+          <h1 class="profile__name">Jacques Cousteau</h2>
+            <button class="button button_profile_edit" type="button aria-label=" Edit profile"></button>
+            <p class="profile__job">Explorer</p>
+        </div>
 
-    <button class="button button_add" type="button"></button>
-    </section>
+        <button class="button button_profile_add" type="button aria-label=" add or create new profile"></button>
+      </section>
+
+
+      <section class="locations">
+        <div class="card">
+          <img src="assets/images/image_unsplash_yosemite-valley.png" alt="photo of yosemite valley"
+            class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Yosemite Valley</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"></p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/image_unsplash_lake-louise.png" alt="photo of lake louise" class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Lake Louise</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"></p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/image_unsplash_bald-mountains.png" alt="photo of bald mountains" class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Bald Mountains</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"></p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/image_unsplash-latermar.png" alt="photo of latermar" class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Latemar</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"></p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/image_unsplash-vaniose-national-park.png" alt="photo of vaniose national park"
+            class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Vanoise National Park</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"> here is some text</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/image_unsplash_lago-di-braies.png" alt="photo of lago_di_braies" class="card__image">
+          <div class="card__footer">
+            <h2 class="card__text">Lago di Braies</h2>
+            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
+            <p class="card__overflow-tooltip"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__about">&copy; 2020 Around The U.S.</p>
+    </footer>
+
     <div class="popup">
-      <div class="edit-window">
-        <button class="button edit-window__button-close" type="button"></button>
-        <h2 class="edit-window__title">Edit Profile</h2>
-        <form class="edit-window__form" name="editWindow">
-          <div>
-          <input class="edit-window__name" type="text" name="name" id="name" placeholder="Insert name here..." required>
-        </div>
-        <div>
-          <input class="edit-window__job" type="text" name="job" id="job-des" placeholder="Insert job here...">
-        </div>
-        <button class="button button_submit" type="submit">Save</button>
-      </form>
+      <div class="popup__window">
+        <button class="button button_popup_close" type="button" aria-label="Close window"></button>
+        <h2 class="popup__title">Edit Profile</h2>
+        <form class="popup__form" name="editWindow">
+          <input class="popup__form-in" type="text" name="name" id="name" placeholder="Insert name here..." required>
+          <input class="popup__form-in" type="text" name="job" id="job-des" placeholder="Insert job here...">
+          <button class="button button_popup_submit type=" submit">Save</button>
+        </form>
       </div>
     </div>
+  </div>
 
-    <section class="locations">
-      <div class="card">
-        <img src="assets/images/image_unsplash_yosemite-valley.png" alt="photo of yosemite valley" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Yosemite Valley  </h2>
-          <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="assets/images/image_unsplash_lake-louise.png" alt="photo of lake louise" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Lake Louise</h2>
-          <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="assets/images/image_unsplash_bald-mountains.png" alt="photo of bald mountains" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Bald Mountains</h2>
-         <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="assets/images/image_unsplash-latermar.png" alt="photo of latermar" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Latemar</h2>
-     <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="assets/images/image_unsplash-vaniose-national-park.png" alt="photo of vaniose national park" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Vanoise National Park</h2>
-     <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="assets/images/image_unsplash_lago-di-braies.png" alt="photo of lago_di_braies" class="card__image">
-        <div class="card__footer">
-          <h2 class="card__text">Lago di Braies</h2>
-     <img class="card__icon" src="assets/icons/Vector.svg" alt="heart icon (like)">
-        </div>
-      </div>
-
-    </section>
-  </main>
-  <footer class="footer">
-    <p class="footer__about">&copy; 2020 Around The U.S.</p>
-  </footer>
-</div>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

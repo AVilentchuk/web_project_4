@@ -1,5 +1,0 @@
-.edit-window__name {
-  width: clamp(238px, 28vw, 358px);
-  border-style: none;
-  border-bottom: #ececec solid 1px;
-}
