@@ -11,7 +11,3 @@
   color: black;
   text-align: center;
 }
-
-.card__text:hover ~ .card__overflow-tooltip {
-  opacity: 0.8;
-}
