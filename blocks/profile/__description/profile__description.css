@@ -7,5 +7,5 @@
     "profile-n  profile-b"
     "profile-s  profile-s";
   white-space: nowrap;
-  width: min-content;
+  width: max-content;
 }

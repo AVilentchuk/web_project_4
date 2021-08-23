@@ -1,4 +1,4 @@
-.button_popup_submit {
+.button_type_submit {
   margin: clamp(15px, 2vw, 18px) auto clamp(25px, 3.26vw, 36px);
   padding: 0;
   color: white;
@@ -13,6 +13,6 @@
   text-align: center;
   border: 0;
 }
-.button_popup_submit:hover {
+.button_type_submit:hover {
   opacity: 0.8;
 }
