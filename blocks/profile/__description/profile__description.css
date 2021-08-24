@@ -6,5 +6,7 @@
 	grid-template-areas: "profile-n  profile-b" "profile-s  profile-s";
 	white-space: nowrap;
 	width: max-content;
-	width: clamp(100% - 150px, 80vw, 430px);
+  justify-items: start;
+	max-width: clamp(282px, 50vw, 520px);
+  justify-items: start;
 }
