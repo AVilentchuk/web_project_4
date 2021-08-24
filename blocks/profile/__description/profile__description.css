@@ -8,4 +8,5 @@
     "profile-s  profile-s";
   white-space: nowrap;
   width: max-content;
+  width: clamp(100% - 150px, 80vw, 430px);
 }
