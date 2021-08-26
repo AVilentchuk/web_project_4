@@ -1,4 +1,4 @@
-.popup__window {
+.popup__window_add {
   display: none;
   flex-direction: column;
   position: relative;

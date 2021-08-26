@@ -27,56 +27,6 @@
 
 
       <section class="locations">
-        <div class="card">
-          <img src="assets/images/image_unsplash_yosemite-valley.png" alt="photo of yosemite valley"
-            class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Yosemite Valley</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="assets/images/image_unsplash_lake-louise.png" alt="photo of lake louise" class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Lake Louise</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="assets/images/image_unsplash_bald-mountains.png" alt="photo of bald mountains" class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Bald Mountains</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="assets/images/image_unsplash-latermar.png" alt="photo of latermar" class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Latemar</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="assets/images/image_unsplash-vaniose-national-park.png" alt="photo of vaniose national park"
-            class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Vanoise National Park</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="assets/images/image_unsplash_lago-di-braies.png" alt="photo of lago_di_braies" class="card__image">
-          <div class="card__footer">
-            <h2 class="card__text">Lago di Braies</h2>
-            <button class="button card__like-button" type="button" aria-label="heart icon (like)"></button>
-            <div class="card__overflow-tooltip"></div>
-          </div>
-        </div>
       </section>
     </main>
     <footer class="footer">
@@ -84,7 +34,7 @@
     </footer>
 
     <div class="popup">
-      <div class="popup__window">
+      <div class="popup__window" id="w-edit">
         <button class="button button_type_close" type="button" aria-label="Close window"></button>
         <h2 class="popup__title">Edit Profile</h2>
         <form class="popup__form" name="editWindow">
@@ -93,9 +43,38 @@
           <button class="button button_type_submit" type="submit">Save</button>
         </form>
       </div>
-    </div>
+
+    <div class="popup__window_add" id="w-add">
+        <button class="button button_type_close" type="button" aria-label="Close window"></button>
+        <h2 class="popup__title">New place</h2>
+        <form class="popup__form" name="addWindow">
+          <input class="popup__form-in" type="text" name="title" id="place-title" placeholder="Title" required>
+          <input class="popup__form-in" type="text" name="image-link" id="image-link" placeholder="Image link">
+          <button class="button button_type_submit" type="submit">Save</button>
+        </form>
+      </div>
+
+    <div class="popup__window_img" id="w-img">
+        <button class="button button_type_close" type="button" aria-label="Close window"></button>
+        <img class="popup__img" src="" alt="enlarged version of the image clicked">
+        <h2 class="popup__place-name"></h2>
+      </div>
+
   </div>
 
+<template id="card-temp">
+  <div class="card">
+    <button class="button button_type_delete" type="click" onclick="return this.parentNode.remove();"></button>
+    <img src="" alt=""
+      class="card__image">
+    <div class="card__footer">
+      <h2 class="card__text"></h2>
+        <button class="button card__like-button" onclick="classList.toggle('card__like-button_active')" aria-label="heart icon (like)"></button>
+      <div class="card__overflow-tooltip"></div>
+
+    </div>
+  </div>
+</template>
   <script src="scripts/index.js"></script>
 </body>
 

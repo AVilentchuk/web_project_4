@@ -1,0 +1,14 @@
+.popup__img {
+  max-height: 75vh;
+  max-width: 75vw;
+  object-fit: scale-down;
+}
+.popup__place-name {
+  margin-top: 5px;
+  color: white;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+}
