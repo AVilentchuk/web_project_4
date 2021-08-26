@@ -1,9 +1,10 @@
-.popup__window_img {
+.popup__window-add {
   display: none;
   flex-direction: column;
   position: relative;
-  background:none;
-  /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); */
+  width: clamp(282px, 35vw, 430px);
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   transition:display .5s ease-in-out;
 }
