@@ -8,6 +8,8 @@
   background: white;
   border-radius: 10px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .card > .button_type_delete {
   background: transparent url("../../assets/icons/Trash.svg") center no-repeat;
