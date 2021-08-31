@@ -1,10 +1,14 @@
 .card__image {
   max-width: 100%;
-  max-height: auto;
-  min-height: 282px;
   height: 282px;
   width: 100%;
   object-fit: cover;
   object-position: center;
   background: black;
+  display: inline-block;
+  text-align: center;
+}
+
+.card__image::before {
+  line-height: 282px;
 }

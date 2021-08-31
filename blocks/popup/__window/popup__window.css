@@ -1,5 +1,6 @@
 .popup__window {
-  display: none;
+  visibility: collapse;
+  display: flex;
   flex-direction: column;
   position: relative;
   width: clamp(282px, 35vw, 430px);
