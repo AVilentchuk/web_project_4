@@ -4,12 +4,3 @@
   min-width: 282px;
   min-height: 282px;
 }
-.popup__place-name {
-  margin-top: 5px;
-  color: white;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 15px;
-}
