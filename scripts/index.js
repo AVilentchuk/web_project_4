@@ -20,8 +20,8 @@ const newImageLink = document.getElementById("image-link");
 const imageWindowName = document.querySelector(".popup__place-name");
 const imageWindowPhoto = document.querySelector(".popup__img");
 //arrow keys
-const leftArrow = document.querySelector(".navigation__arrow_type_left");
-const rightArrow = document.querySelector(".navigation__arrow_type_right");
+const leftArrow = document.querySelector(".navigation__arrow--left");
+const rightArrow = document.querySelector(".navigation__arrow--right");
 //template
 const cardTemplate = document
   .querySelector("#card-temp")

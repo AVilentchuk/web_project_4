@@ -1,4 +1,4 @@
-.navigation__arrow_type_left {
+.navigation__arrow--left {
   position: absolute;
   top: calc(50% - 100px);
   left: clamp(-100px, -5.6vw, -18px);
@@ -10,6 +10,6 @@
   transition: opacity 0.2s ease-in-out, border-right-width 0.2s ease-in-out;
 }
 
-.navigation__arrow_type_left:hover {
+.navigation__arrow--left:hover {
   opacity: 0.8;
 }
