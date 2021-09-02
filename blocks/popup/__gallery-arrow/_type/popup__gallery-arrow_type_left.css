@@ -1,4 +1,4 @@
-.popup__gallery_arrow_left {
+.popup__gallery-arrow_type_left {
   position: absolute;
   top: calc(50% - 100px);
   left: clamp(-100px, -5.6vw, -18px);
@@ -9,6 +9,6 @@
   border-right: clamp(10px, 3.7vw, 40px) solid white;
   transition: opacity 0.2s ease-in-out, border-right-width 0.2s ease-in-out;
 }
-.popup__gallery_arrow_left:hover {
+.popup__gallery-arrow_type_left:hover {
   opacity: 0.8;
 }
