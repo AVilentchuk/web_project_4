@@ -1,4 +1,4 @@
-.navigation-arrow_type_right {
+.navigation-arrow_right {
   position: absolute;
   top: calc(50% - 100px);
   right: clamp(-100px, -5.6vw, -18px);
@@ -7,9 +7,10 @@
   border-top: 100px solid transparent;
   border-bottom: 100px solid transparent;
   border-left: clamp(10px, 3.7vw, 40px) solid white;
+  border-right:unset;
   transition: opacity 0.2s ease-in-out, border-left-width 0.2s ease-in-out;
 }
 
-.navigation-arrow_type_right:hover {
+.navigation-arrow_right:hover {
   opacity: 0.8;
 }

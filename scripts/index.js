@@ -20,8 +20,8 @@ const newImageLink = document.getElementById("image-link");
 const imageWindowName = document.querySelector(".popup__place-name");
 const imageWindowPhoto = document.querySelector(".popup__img");
 //arrow keys
-const leftArrow = document.querySelector(".navigation__arrow--left");
-const rightArrow = document.querySelector(".navigation__arrow--right");
+const leftArrow = document.querySelector(".navigation-arrow_left");
+const rightArrow = document.querySelector(".navigation-arrow_right");
 //template
 const cardTemplate = document
   .querySelector("#card-temp")
@@ -87,9 +87,9 @@ function goRight() {
 }
 //toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
 toggleArrow = (e) => {
-  e.classList.add("navigation__arrow-animation_type_keyboard");
+  e.classList.add("navigation-arrow_animated");
   delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
-  setTimeout(() => e.classList.remove("navigation__arrow-animation_type_keyboard"), delayTime);
+  setTimeout(() => e.classList.remove("navigation-arrow_animated"), delayTime);
 };
 //switch for keyDown listener
 function checkKey(key) {
