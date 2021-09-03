@@ -200,9 +200,6 @@ function openImage(card) {
   openPopup(galleryWindow);
   navigationArrows(card);
 }
-alert("This page works better on firefox!! \n(try adding a broken image with long name to locations\n try selecting long text under image when gallery opened)");
-alert("There are is a keyboard listener for closing popups and navigating the gallery when turned on! escape to exit, left/right arrows to navigate ");
-
 
 //<<END>> Specific action functions <<END>>
 
