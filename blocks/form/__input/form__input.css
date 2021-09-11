@@ -1,4 +1,4 @@
-.popup__form-input {
+.form__input {
   position: relative;
   width: clamp(238px, 28vw, 358px);
   font-family: Inter;
@@ -10,6 +10,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.popup__form-input:invalid {
-  border-bottom: #ff0000;
+.form__input:invalid {
+  border-bottom: 1px solid #ff0000;
 }

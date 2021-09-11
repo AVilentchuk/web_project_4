@@ -26,17 +26,31 @@ const rightArrow = document.querySelector(".navigation-arrow_right");
 const cardTemplate = document
   .querySelector("#card-temp")
   .content.querySelector(".card");
-
+//Form formInput and error message selectors
+// const formList = document.querySelector(".form");
+// const formInput = form.querySelector(".form__input");
+// const inputError = form.querySelector(`.${formInput.id}-error`);
 // <<END>> reused variables  <<END>>
 
 //<<START>> functions for opening & closing windows <<START>>
+const popupBackgroundClickClose = () => {
+  console.log(event.target);
+  if (event.target.classList.contains("popup") && event.target.classList.contains("popup_active")) {
+    closePopup();
+    event.target.removeEventListener("click", popupBackgroundClickClose)
+  }
+};
+
 function openPopup(target) {
-  target.parentNode.classList.add("popup_active");
+  const popupBackground =   target.parentNode;
+  popupBackground.classList.add("popup_active");
   target.classList.add("popup_active");
+  popupBackground.addEventListener('click', popupBackgroundClickClose);
 }
 //closes popup and active window/windows.
 function closePopup(e) {
-  if (!e) { //distinguishes between escape click close and mouse click close.
+  if (!e) {
+    //distinguishes between escape click close and mouse click close.
     document
       .querySelectorAll(".popup_active")
       .forEach((target) => target.classList.remove("popup_active"));
@@ -58,13 +72,13 @@ closeButton.forEach((btn) => btn.addEventListener("click", closePopup));
 //This gets the value of the card clicked from photo listeners
 function navigationArrows(card) {
   //if conditions for exceptions of no sibling to go to start/end.
- !card.previousElementSibling ?
-  leftImage = card.parentNode.lastChild :
-  leftImage = card.previousElementSibling;
+  !card.previousElementSibling
+    ? (leftImage = card.parentNode.lastChild)
+    : (leftImage = card.previousElementSibling);
 
- !card.nextElementSibling ?
-  rightImage = card.parentNode.firstChild :
-  rightImage = card.nextElementSibling;
+  !card.nextElementSibling
+    ? (rightImage = card.parentNode.firstChild)
+    : (rightImage = card.nextElementSibling);
 
   navigationArrows.left = leftImage;
   navigationArrows.right = rightImage;
@@ -130,23 +144,23 @@ const addCard = (locationName, imageUrl) => {
   inputImageUrl.src = imageUrl;
   inputImageUrl.alt = `Photograph of ${locationName}`; //lookie here an alt
   //creating listener for image
-  inputImageUrl.addEventListener("click",function imageListener(e)  {
+  inputImageUrl.addEventListener("click", function imageListener(e) {
     imageWindowName.textContent = locationName;
     imageWindowPhoto.src = imageUrl; // comment about missing alt look at the comment above
     openImage(e.target.parentNode);
   });
   //creating delete button listener
-  deleteButton.addEventListener("click",function deleteListener(button) {
+  deleteButton.addEventListener("click", function deleteListener(button) {
     button.currentTarget.parentNode.remove();
     button.currentTarget.parentNode = null;
   });
   //attaching the card at the end of locations.
   cardContainer.prepend(newCard);
   //this adds a caption to the place's name if it doesn't fit in the card.
-  inputLocationName.scrollWidth > inputLocationName.clientWidth?
-    overflowTooltip.textContent = inputLocationName.textContent:
-    overflowTooltip.remove();
-  }
+  inputLocationName.scrollWidth > inputLocationName.clientWidth
+    ? (overflowTooltip.textContent = inputLocationName.textContent)
+    : overflowTooltip.remove();
+};
 
 //Looping over the array in initialCards.js
 initialCards.forEach((location) => {
@@ -186,13 +200,13 @@ function pullProfileData() {
 function openEdit() {
   pullProfileData();
   openPopup(editProfileWindow);
-  windowForm = editProfileWindow.querySelector(".popup__form");
+  windowForm = editProfileWindow.querySelector(".form");
   windowForm.addEventListener("submit", submitProfile);
 }
 //opens add window
 function openAdd() {
   openPopup(addWindow);
-  windowForm = addWindow.querySelector(".popup__form");
+  windowForm = addWindow.querySelector(".form");
   windowForm.addEventListener("submit", submitPlace);
 }
 //opens galleryWindow and send card clicked to navigation function.
@@ -207,3 +221,12 @@ function openImage(card) {
 editButton.addEventListener("click", openEdit); //edit button listener
 addButton.addEventListener("click", openAdd); //add button listener
 //<<END>> base page button listeners <<END>>
+
+//popup Click out of bounds
+// const popupBackgrounds = document.querySelectorAll(".popup");
+// function lookie() {
+//   popupBackgrounds.forEach((popup) => popup.classList.contains("popup_active")?
+//   popup.addEventListener("click" ,popupBackgroundClickClose): "")
+
+// }
+
