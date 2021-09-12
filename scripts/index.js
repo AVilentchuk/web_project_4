@@ -1,5 +1,17 @@
+//Imported functions
+import {initialCards} from './initialCards.js';
+import * as Validator from './validate.js';
+// import {resetValidation} from "./validate.js";
+// resetValidation(form);
+//variable declarations //
+var locationName;
+var imageUrl;
+var windowTarget;
+var windowParent;
+var windowForm;
 // <<START>> reused variables  <<START>>
 // buttons
+const navigationArrowsContainer = document.querySelectorAll(".navigation-arrow");
 const editButton = document.querySelector(".profile__button-edit");
 const addButton = document.querySelector(".profile__button-add");
 //popup windows & container
@@ -33,18 +45,19 @@ const cardTemplate = document
 // <<END>> reused variables  <<END>>
 
 //<<START>> functions for opening & closing windows <<START>>
+//Closes popup on background click
 const popupBackgroundClickClose = () => {
-  console.log(event.target);
   if (event.target.classList.contains("popup") && event.target.classList.contains("popup_active")) {
     closePopup();
     event.target.removeEventListener("click", popupBackgroundClickClose)
   }
 };
 
-function openPopup(target) {
-  const popupBackground =   target.parentNode;
+function openPopup(window) {
+  const popupBackground =   window.parentNode;
   popupBackground.classList.add("popup_active");
-  target.classList.add("popup_active");
+  window.classList.add("popup_active");
+  window.querySelector("form")? Validator.resetValidation(window.querySelector("form")) :"";
   popupBackground.addEventListener('click', popupBackgroundClickClose);
 }
 //closes popup and active window/windows.
@@ -72,6 +85,8 @@ closeButton.forEach((btn) => btn.addEventListener("click", closePopup));
 //This gets the value of the card clicked from photo listeners
 function navigationArrows(card) {
   //if conditions for exceptions of no sibling to go to start/end.
+  var leftImage;
+  var rightImage;
   !card.previousElementSibling
     ? (leftImage = card.parentNode.lastChild)
     : (leftImage = card.previousElementSibling);
@@ -80,8 +95,8 @@ function navigationArrows(card) {
     ? (rightImage = card.parentNode.firstChild)
     : (rightImage = card.nextElementSibling);
 
-  navigationArrows.left = leftImage;
-  navigationArrows.right = rightImage;
+   navigationArrows.left = leftImage;
+   navigationArrows.right = rightImage;
 }
 
 function goLeft() {
@@ -99,13 +114,13 @@ function goRight() {
     navigationArrows.right.querySelector(".card__text").textContent;
   navigationArrows(navigationArrows.right); //sends data to navigation to update card location.
 }
-//toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
-toggleArrow = (e) => {
+// toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
+function toggleArrow (e) {
   e.classList.add("navigation-arrow_animated");
-  delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
+  var delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
   setTimeout(() => e.classList.remove("navigation-arrow_animated"), delayTime);
 };
-//switch for keyDown listener
+// switch for keyDown listener
 function checkKey(key) {
   switch (key.keyCode) {
     case 37:
@@ -127,6 +142,16 @@ function checkKey(key) {
       break;
   }
 }
+//Listener for mouse click on navigation arrows
+function navigationListenerSetup() {
+  navigationArrowsContainer.forEach((arrow) =>{
+    arrow.classList.contains("navigation-arrow_left")?
+    arrow.addEventListener("click", goLeft):
+    arrow.addEventListener('click', goRight);
+  }
+  );
+}
+navigationListenerSetup();
 //keyDown Listener for document
 document.addEventListener("keydown", checkKey);
 //<<END>> Navigation functions <<END>>
@@ -142,11 +167,11 @@ const addCard = (locationName, imageUrl) => {
   // value assignment here
   inputLocationName.textContent = locationName;
   inputImageUrl.src = imageUrl;
-  inputImageUrl.alt = `Photograph of ${locationName}`; //lookie here an alt
+  inputImageUrl.alt = `Photograph of ${locationName}`;
   //creating listener for image
   inputImageUrl.addEventListener("click", function imageListener(e) {
     imageWindowName.textContent = locationName;
-    imageWindowPhoto.src = imageUrl; // comment about missing alt look at the comment above
+    imageWindowPhoto.src = imageUrl;
     openImage(e.target.parentNode);
   });
   //creating delete button listener
@@ -163,6 +188,7 @@ const addCard = (locationName, imageUrl) => {
 };
 
 //Looping over the array in initialCards.js
+
 initialCards.forEach((location) => {
   [locationName, imageUrl] = [location.name, location.link];
   addCard(locationName, imageUrl);
@@ -222,11 +248,5 @@ editButton.addEventListener("click", openEdit); //edit button listener
 addButton.addEventListener("click", openAdd); //add button listener
 //<<END>> base page button listeners <<END>>
 
-//popup Click out of bounds
-// const popupBackgrounds = document.querySelectorAll(".popup");
-// function lookie() {
-//   popupBackgrounds.forEach((popup) => popup.classList.contains("popup_active")?
-//   popup.addEventListener("click" ,popupBackgroundClickClose): "")
-
-// }
-
+//Validator activation
+Validator.enableValidation();

@@ -1,3 +1,4 @@
+var submitButton;
 //<<START>> Validation Functions <<START>>
 const deactivateError = (form, input) => {
   const errorField = input.nextElementSibling;
@@ -9,13 +10,9 @@ const activateError = (form, input, message) => {
   const errorField = input.nextElementSibling;
   errorField.classList.add("form__input-error_active");
   errorField.textContent = message;
-  console.log(message);
 };
 const disableSubmit = (form, flag) => {
-  console.log(form);
   submitButton = form.querySelector(".button_type_submit");
-  console.log(submitButton);
-  console.log(flag);
   switch (flag) {
     case true:
       submitButton.classList.add("button_disabled");
@@ -36,10 +33,10 @@ const checkInputValid = () => {
   !input.validity.valid
     ? activateError(form, input, input.validationMessage)
     : deactivateError(form, input);
-  inputList = Array.from(form.querySelectorAll(".form__input"));
+  const inputList = Array.from(form.querySelectorAll(".form__input"));
   const flag = inputList.some((item) => !item.validity.valid);
   disableSubmit(form, flag);
-  console.log(event);
+
 };
 
 const setEventListeners = (form) => {
@@ -49,32 +46,29 @@ const setEventListeners = (form) => {
   });
 };
 
-const resetValidation = (formList) => {
-  formList.forEach((form) => {
-    const inputList = Array.from(form.querySelectorAll(".form__input"));
+const resetValidation = (form) => {
+    const inputList = Array.from(form.querySelectorAll(".form__input"))
     inputList.forEach((input) =>
       !input.validity.valid
         ? activateError(form, input, input.validationMessage)
         : deactivateError(form, input)
     );
     const flag = inputList.some((item) => !item.validity.valid);
+    console.log(flag);
     disableSubmit(form, flag);
-  });
-};
+}
+const formPreventSubmit = (e) => e.preventDefault();
 
 function enableValidation() {
   const formList = document.querySelectorAll(".form");
-  console.log(formList);
   formList.forEach((form) => {
     form.addEventListener(
-      "submit",
-      (formPreventSubmit = (e) => e.preventDefault())
-    );
+      "submit",formPreventSubmit);
     setEventListeners(form);
-    resetValidation(formList);
+    resetValidation(form);
   });
 }
 
-enableValidation();
-
+export {resetValidation, disableSubmit, formPreventSubmit , enableValidation};
 // resetValidation();
+

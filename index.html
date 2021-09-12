@@ -18,9 +18,9 @@
       <section class="profile">
         <img class="profile__photo" src="assets/images/avatar_photo.png" alt="profile photo of user" />
         <div class="profile__description">
-          <h1 class="profile__name">Jacques Cousteau</h1>
+          <h1 class="profile__name">Kristine Weiss</h1>
           <button class="button profile__button-edit" type="button" aria-label="Edit profile"></button>
-          <p class="profile__job">Explorer</p>
+          <p class="profile__job">Travel guide, food enthusiastic and culture lover</p>
         </div>
         <button class="button profile__button-add" type="button" aria-label="Add or create new profile"></button>
       </section>
@@ -75,13 +75,13 @@
       </div>
     </div>
 
-    <div class="popup popup_gallery"">
+    <div class="popup popup_gallery">
       <div class="popup__gallery" id="w-img">
         <button class="button button_type_close" type="button" aria-label="Close window"></button>
-        <img class="popup__img" src="placeholder" alt="enlarged version of the image clicked" />
+        <img class="popup__img" src="./" alt="enlarged version of the image clicked"/>
         <h2 class="popup__place-name"></h2>
-        <div class="navigation-arrow navigation-arrow_left" onclick="goLeft(this)"></div>
-        <div class="navigation-arrow navigation-arrow_right" onclick="goRight(this)"></div>
+        <div class="navigation-arrow navigation-arrow_left"></div>
+        <div class="navigation-arrow navigation-arrow_right"></div>
       </div>
     </div>
   </div>
@@ -98,9 +98,8 @@
       </div>
     </div>
   </template>
-  <script src="scripts/initialCards.js"></script>
-  <script src="scripts/index.js"></script>
-  <script src="scripts/validate.js"></script>
+
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
