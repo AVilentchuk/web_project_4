@@ -1,8 +1,6 @@
 //Imported functions
 import { initialCards } from "./initialCards.js";
 import * as Validator from "./validate.js";
-//variable declarations //
-let windowForm;
 // <<START>> reused variables  <<START>>
 // buttons
 const navigationArrowsContainer =
@@ -58,7 +56,6 @@ function goLeft() {
     navigationArrows.left.querySelector(".card__text").textContent;
   navigationArrows(navigationArrows.left); //sends data to navigation to update card location.
 }
-
 function goRight() {
   imageWindowPhoto.src =
     navigationArrows.right.querySelector(".card__image").src;
@@ -69,13 +66,13 @@ function goRight() {
 // toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
 function toggleArrow(e) {
   e.classList.add("navigation-arrow_animated");
-  var delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
+  const delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
   setTimeout(() => e.classList.remove("navigation-arrow_animated"), delayTime);
 }
 // switch for keyDown listener
 function keyListener(key) {
-  switch (key.keyCode) {
-    case 37:
+  switch (key.code) {
+    case 'ArrowLeft':
       if (
         document
           .querySelector(".popup_active")
@@ -85,7 +82,7 @@ function keyListener(key) {
         toggleArrow(leftArrow);
       }
       break;
-    case 39:
+    case 'ArrowRight':
       if (
         document
           .querySelector(".popup_active")
@@ -95,7 +92,7 @@ function keyListener(key) {
         toggleArrow(rightArrow);
       }
       break;
-    case 27:
+    case 'Escape':
       closePopup();
       break;
     default:
@@ -121,9 +118,11 @@ function detachMouseNavigationListener() {
 //Attach key listener
 function attachKeyListener() {
   document.addEventListener("keydown", keyListener);
-  document.querySelector(".popup_active").classList.contains("popup_gallery")
-    ? attachMouseNavigationListener()
-    : "";
+  if (
+    document.querySelector(".popup_active").classList.contains("popup_gallery")
+  ) {
+    attachMouseNavigationListener();
+  }
 }
 //Detach key listener
 function detachKeyListener() {
@@ -149,8 +148,8 @@ function openPopup(window) {
 
 //closes popup and active window/windows.
 function closePopup() {
-  var activePop = document.querySelector(".popup_active");
-  var form = activePop.querySelector(".form");
+  const activePop = document.querySelector(".popup_active");
+  const form = activePop.querySelector(".form");
   activePop.classList.remove("popup_active");
   activePop.removeEventListener("click", closeOnClickBackground);
   if (form) {
@@ -164,16 +163,6 @@ const closeButton = document.querySelectorAll(".button_type_close");
 closeButton.forEach((button) => button.addEventListener("click", closePopup));
 //<<END>> functions for opening windows <<END>>
 //<<START>> function to construct new cards followed by loop to run it on each item in initial array <<START>>
-//Adds the card to the locations and removes/adjusts the tooltip according to the width of text.
-function addCard(card) {
-  cardContainer.prepend(card);
-  //adjusts/removes tooltip
-  const overflowTooltip = card.querySelector(".card__overflow-tooltip");
-  const inputLocationName = card.querySelector(".card__text");
-  inputLocationName.scrollWidth > inputLocationName.clientWidth
-    ? (overflowTooltip.textContent = inputLocationName.textContent)
-    : overflowTooltip.remove();
-}
 //creates the card
 const createCard = (cardData) => {
   // template variables in function
@@ -197,12 +186,29 @@ const createCard = (cardData) => {
     button.currentTarget.parentNode.remove();
   });
   //Passes the new card to be rendered
-  return addCard(newCard);
+  return newCard;
 };
 
+// const newCard = createCard();
+
+//Adds the card to the locations and removes/adjusts the tooltip according to the width of text.
+// console.log(newCard);
+function addCard(card) {
+  cardContainer.prepend(card);
+  //adjusts/removes tooltip
+  let overflowTooltip = card.querySelector(".card__overflow-tooltip");
+  const inputLocationName = card.querySelector(".card__text");
+  if (inputLocationName.scrollWidth > inputLocationName.clientWidth) {
+    overflowTooltip.textContent = inputLocationName.textContent;
+  } else {
+    overflowTooltip.remove();
+    overflowTooltip = null;
+  }
+}
 //Looping over the array in initialCards.js
 initialCards.forEach((cardData) => {
-  createCard(cardData);
+  const newCard = createCard(cardData);
+  addCard(newCard);
 });
 //<<END>> function to construct new cards followed by loop to run it on each item in initial array <<END>>
 //<<START>> Submission functions <<START>>
@@ -217,9 +223,11 @@ function submitProfile(e) {
 //submits the new location added in the add window.
 function submitPlace(e) {
   e.preventDefault(); //prevent default behavior or submit form.
-  const placeTitle = newPlace.value; // get current values inside
-  const imageUrl = newImageLink.value; // input field of the add window.
-  createCard(placeTitle, imageUrl);
+  const newCard = {
+    'name':  newPlace.value,
+    'link': newImageLink.value
+  };
+  addCard(createCard(newCard));
   closePopup();
   e.target.removeEventListener("submit", submitPlace);
   e.target.reset();
@@ -236,13 +244,13 @@ function pullProfileData() {
 function openEdit() {
   pullProfileData();
   openPopup(editProfileWindow);
-  windowForm = editProfileWindow.querySelector(".form");
+  const windowForm = editProfileWindow.querySelector(".form");
   windowForm.addEventListener("submit", submitProfile);
 }
 //opens add window
 function openAdd() {
   openPopup(addWindow);
-  windowForm = addWindow.querySelector(".form");
+  const windowForm = addWindow.querySelector(".form");
   windowForm.addEventListener("submit", submitPlace);
 }
 //opens galleryWindow and send card clicked to navigation function.
