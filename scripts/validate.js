@@ -27,6 +27,7 @@ const checkIfInputValid = () => {
   const input = event.target;
   const form = input.closest(".form");
   const inputList = Array.from(form.querySelectorAll(".form__input"));
+  input.classList.add("form__input_status");
   !input.validity.valid
     ? activateError(input, input.validationMessage)
     : deactivateError(input);
@@ -34,26 +35,17 @@ const checkIfInputValid = () => {
   const formStatus = inputList.some((item) => !item.validity.valid);
   return controlSubmit(form, formStatus);
 };
-//Function has a listener for focus, when Focus shows initial validation error and removes the listener.
-const runCheckOnFocus = () => {
-  checkIfInputValid(event);
-  event.target.classList.add("form__input_status");
-  event.target.removeEventListener("focus", runCheckOnFocus);
-};
 //<<END>> Error messages control <<END>>
 //<<START>> Listeners control <<START>>
 const setEventListeners = (form) => {
   const inputList = Array.from(form.querySelectorAll(".form__input"));
   inputList.forEach((input) => {
-    input.addEventListener("focus", runCheckOnFocus);
     input.addEventListener("input", checkIfInputValid);
   });
 };
-
 const unsetEventListeners = (form) => {
   const inputList = Array.from(form.querySelectorAll(".form__input"));
   inputList.forEach((input) => {
-    input.removeEventListener("focus", runCheckOnFocus);
     input.removeEventListener("input", checkIfInputValid);
   });
 };

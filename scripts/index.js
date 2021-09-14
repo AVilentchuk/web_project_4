@@ -31,20 +31,30 @@ const rightArrow = document.querySelector(".navigation-arrow_right");
 const cardTemplate = document
   .querySelector("#card-temp")
   .content.querySelector(".card");
+
+//closes popup and active window/windows.
+function closePopup() {
+  const activePopup = document.querySelector(".popup_active");
+  const form = activePopup.querySelector(".form");
+  activePopup.classList.remove("popup_active");
+  activePopup.removeEventListener("click", closeOnClickBackground);
+  if (form) {
+    Validator.resetValidation(form);
+    form.reset();
+  }
+  detachKeyListener();
+}
+const closeOnClickBackground = () => {
+  if (event.target.classList.contains("popup_active")) {
+    closePopup();
+  }
+};
 //<<START>> Navigation functions <<START>>
 //This gets the value of the card clicked from photo listeners
 function navigationArrows(card) {
   //if conditions for exceptions of no sibling to go to start/end.
-  var leftImage;
-  var rightImage;
-  !card.previousElementSibling
-    ? (leftImage = card.parentNode.lastChild)
-    : (leftImage = card.previousElementSibling);
-
-  !card.nextElementSibling
-    ? (rightImage = card.parentNode.firstChild)
-    : (rightImage = card.nextElementSibling);
-
+  const leftImage = card.previousElementSibling || card.parentNode.lastChild;
+  const rightImage = card.nextElementSibling || card.parentNode.firstChild;
   navigationArrows.left = leftImage;
   navigationArrows.right = rightImage;
 }
@@ -52,6 +62,8 @@ function navigationArrows(card) {
 function goLeft() {
   imageWindowPhoto.src =
     navigationArrows.left.querySelector(".card__image").src;
+  imageWindowPhoto.alt =
+    navigationArrows.right.querySelector(".card__image").alt;
   imageWindowName.textContent =
     navigationArrows.left.querySelector(".card__text").textContent;
   navigationArrows(navigationArrows.left); //sends data to navigation to update card location.
@@ -59,6 +71,8 @@ function goLeft() {
 function goRight() {
   imageWindowPhoto.src =
     navigationArrows.right.querySelector(".card__image").src;
+  imageWindowPhoto.alt =
+    navigationArrows.right.querySelector(".card__image").alt;
   imageWindowName.textContent =
     navigationArrows.right.querySelector(".card__text").textContent;
   navigationArrows(navigationArrows.right); //sends data to navigation to update card location.
@@ -66,13 +80,14 @@ function goRight() {
 // toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
 function toggleArrow(e) {
   e.classList.add("navigation-arrow_animated");
-  const delayTime = parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
+  const delayTime =
+    parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
   setTimeout(() => e.classList.remove("navigation-arrow_animated"), delayTime);
 }
 // switch for keyDown listener
 function keyListener(key) {
   switch (key.code) {
-    case 'ArrowLeft':
+    case "ArrowLeft":
       if (
         document
           .querySelector(".popup_active")
@@ -82,7 +97,7 @@ function keyListener(key) {
         toggleArrow(leftArrow);
       }
       break;
-    case 'ArrowRight':
+    case "ArrowRight":
       if (
         document
           .querySelector(".popup_active")
@@ -92,7 +107,7 @@ function keyListener(key) {
         toggleArrow(rightArrow);
       }
       break;
-    case 'Escape':
+    case "Escape":
       closePopup();
       break;
     default:
@@ -101,20 +116,16 @@ function keyListener(key) {
 }
 //Attach mouse click listener for navigation
 function attachMouseNavigationListener() {
-  navigationArrowsContainer.forEach((arrow) => {
-    arrow.classList.contains("navigation-arrow_left")
-      ? arrow.addEventListener("click", goLeft)
-      : arrow.addEventListener("click", goRight);
-  });
+  leftArrow.addEventListener("click", goLeft);
+  rightArrow.addEventListener("click", goRight);
 }
+
 //Detach mouse click listener for navigation
 function detachMouseNavigationListener() {
-  navigationArrowsContainer.forEach((arrow) => {
-    arrow.classList.contains("navigation-arrow_left")
-      ? arrow.removeEventListener("click", goLeft)
-      : arrow.removeEventListener("click", goRight);
-  });
+  leftArrow.removeEventListener("click", goLeft);
+  rightArrow.removeEventListener("click", goRight);
 }
+
 //Attach key listener
 function attachKeyListener() {
   document.addEventListener("keydown", keyListener);
@@ -133,11 +144,6 @@ function detachKeyListener() {
 //<<END>> Navigation functions <<END>>
 //<<START>> functions for opening & closing windows <<START>>
 //Closes popup on background click
-const closeOnClickBackground = () => {
-  if (event.target.classList.contains("popup_active")) {
-    closePopup();
-  }
-};
 
 function openPopup(window) {
   const popupBackground = window.parentNode;
@@ -146,18 +152,6 @@ function openPopup(window) {
   popupBackground.addEventListener("click", closeOnClickBackground);
 }
 
-//closes popup and active window/windows.
-function closePopup() {
-  const activePop = document.querySelector(".popup_active");
-  const form = activePop.querySelector(".form");
-  activePop.classList.remove("popup_active");
-  activePop.removeEventListener("click", closeOnClickBackground);
-  if (form) {
-    Validator.resetValidation(form);
-    form.reset();
-  }
-  detachKeyListener();
-}
 //Close button listener
 const closeButton = document.querySelectorAll(".button_type_close");
 closeButton.forEach((button) => button.addEventListener("click", closePopup));
@@ -192,7 +186,6 @@ const createCard = (cardData) => {
 // const newCard = createCard();
 
 //Adds the card to the locations and removes/adjusts the tooltip according to the width of text.
-// console.log(newCard);
 function addCard(card) {
   cardContainer.prepend(card);
   //adjusts/removes tooltip
@@ -224,8 +217,8 @@ function submitProfile(e) {
 function submitPlace(e) {
   e.preventDefault(); //prevent default behavior or submit form.
   const newCard = {
-    'name':  newPlace.value,
-    'link': newImageLink.value
+    name: newPlace.value,
+    link: newImageLink.value,
   };
   addCard(createCard(newCard));
   closePopup();
