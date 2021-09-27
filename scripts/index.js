@@ -1,6 +1,18 @@
-//Imported functions
+//Imports
 import { initialCards } from "./initialCards.js";
-import * as Validator from "./validate.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+//imports
+export { openImage };
+//settings passed onto form validator
+const settings = {
+  formInput: "form__input",
+  inputStatus: "form__input_status",
+  submitSelector: "button_type_submit",
+  disabledButton: "button_disabled",
+  inputErrorActive: "form__input-error_active",
+};
+
 // <<START>> reused variables  <<START>>
 // buttons
 const navigationArrowsContainer =
@@ -39,8 +51,9 @@ function closePopup() {
   activePopup.classList.remove("popup_active");
   activePopup.removeEventListener("click", closeOnClickBackground);
   if (form) {
-    Validator.resetValidation(form);
     form.reset();
+    const activeForm = new FormValidator(form, settings);
+    activeForm.resetValidation();
   }
   detachKeyListener();
 }
@@ -157,38 +170,12 @@ const closeButton = document.querySelectorAll(".button_type_close");
 closeButton.forEach((button) => button.addEventListener("click", closePopup));
 //<<END>> functions for opening windows <<END>>
 //<<START>> function to construct new cards followed by loop to run it on each item in initial array <<START>>
-//creates the card
-const createCard = (cardData) => {
-  // template variables in function
-  const newCard = cardTemplate.cloneNode(true);
-  const inputLocationName = newCard.querySelector(".card__text");
-  const inputImageUrl = newCard.querySelector(".card__image");
-  const deleteButton = newCard.querySelector(".button_type_delete");
-  // value assignment here
-  inputLocationName.textContent = cardData.name;
-  inputImageUrl.src = cardData.link;
-  inputImageUrl.alt = `Photograph of ${cardData.name}`;
-  //creating listener for image
-  inputImageUrl.addEventListener("click", function imageListener(e) {
-    imageWindowName.textContent = cardData.name;
-    imageWindowPhoto.src = cardData.link;
-    imageWindowPhoto.alt = `Photograph of ${cardData.name}`;
-    openImage(e.target.parentNode);
-  });
-  //creating delete button listener
-  deleteButton.addEventListener("click", function deleteListener(button) {
-    button.currentTarget.parentNode.remove();
-  });
-  //Passes the new card to be rendered
-  return newCard;
-};
-
-// const newCard = createCard();
 
 //Adds the card to the locations and removes/adjusts the tooltip according to the width of text.
 function addCard(card) {
   cardContainer.prepend(card);
   //adjusts/removes tooltip
+  // console.log(card.overflowTooltip);
   let overflowTooltip = card.querySelector(".card__overflow-tooltip");
   const inputLocationName = card.querySelector(".card__text");
   if (inputLocationName.scrollWidth > inputLocationName.clientWidth) {
@@ -199,9 +186,9 @@ function addCard(card) {
   }
 }
 //Looping over the array in initialCards.js
-initialCards.forEach((cardData) => {
-  const newCard = createCard(cardData);
-  addCard(newCard);
+initialCards.forEach((card) => {
+  let CardElement = new Card(card, cardTemplate);
+  addCard(CardElement);
 });
 //<<END>> function to construct new cards followed by loop to run it on each item in initial array <<END>>
 //<<START>> Submission functions <<START>>
@@ -220,7 +207,7 @@ function submitPlace(e) {
     name: newPlace.value,
     link: newImageLink.value,
   };
-  addCard(createCard(newCard));
+  addCard(new Card(newCard, cardTemplate));
   closePopup();
   e.target.removeEventListener("submit", submitPlace);
   e.target.reset();
@@ -259,5 +246,8 @@ editButton.addEventListener("click", openEdit); //edit button listener
 addButton.addEventListener("click", openAdd); //add button listener
 //<<END>> base page button listeners <<END>>
 
-//Validator activation
-Validator.enableValidation();
+//FormValidator activation
+const formList = Array.from(document.querySelectorAll(".form"));
+formList.forEach((form) => {
+  form = new FormValidator(form, settings);
+});
