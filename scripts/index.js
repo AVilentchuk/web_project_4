@@ -40,13 +40,12 @@ const imageWindowPhoto = document.querySelector(".popup__img");
 const leftArrow = document.querySelector(".navigation-arrow_left");
 const rightArrow = document.querySelector(".navigation-arrow_right");
 //template
-const cardTemplate = document
-  .querySelector("#card-temp");
+const cardTemplate = document.querySelector("#card-temp");
 
 //closes popup and active window/windows.
 function closePopup() {
   const activePopup = document.querySelector(".popup_active");
-  let form = activePopup.querySelector(".form");
+  const form = activePopup.querySelector(".form");
   activePopup.classList.remove("popup_active");
   activePopup.removeEventListener("click", closeOnClickBackground);
   if (form) {
@@ -163,8 +162,8 @@ function openPopup(window) {
 }
 
 //Close button listener
-const closeButton = document.querySelectorAll(".button_type_close");
-closeButton.forEach((button) => button.addEventListener("click", closePopup));
+const closeButtons = document.querySelectorAll(".button_type_close");
+closeButtons.forEach((button) => button.addEventListener("click", closePopup));
 //<<END>> functions for opening windows <<END>>
 //<<START>> function to construct new cards followed by loop to run it on each item in initial array <<START>>
 
@@ -184,7 +183,7 @@ function addCard(card) {
 }
 //Looping over the array in initialCards.js
 initialCards.forEach((card) => {
-  let cardElement = new Card(card, cardTemplate);
+  const cardElement = new Card(card, cardTemplate);
   addCard(cardElement.createCard());
 });
 //<<END>> function to construct new cards followed by loop to run it on each item in initial array <<END>>
@@ -204,8 +203,8 @@ function submitPlace(e) {
     name: newPlace.value,
     link: newImageLink.value,
   };
-  const submitCard = new Card(newCard, cardTemplate)
-  addCard(submitCard.createCard());
+  const cardHolder = new Card(newCard, cardTemplate);
+  addCard(cardHolder.createCard());
   closePopup();
   e.target.removeEventListener("submit", submitPlace);
   e.target.reset();
@@ -246,8 +245,8 @@ addButton.addEventListener("click", openAdd); //add button listener
 
 //FormValidator activation
 const formList = Array.from(document.querySelectorAll(".form"));
-formList.forEach( form => {
-  form = new FormValidator(form, settings)
+formList.forEach((form) => {
+  form = new FormValidator(form, settings);
   form.enableValidation();
 });
 //I decided to extend the FormDATA class with FormValidator, that way
