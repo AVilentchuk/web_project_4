@@ -41,23 +41,20 @@ const leftArrow = document.querySelector(".navigation-arrow_left");
 const rightArrow = document.querySelector(".navigation-arrow_right");
 //template
 const cardTemplate = document
-  .querySelector("#card-temp")
-  .content.querySelector(".card");
+  .querySelector("#card-temp");
 
 //closes popup and active window/windows.
 function closePopup() {
   const activePopup = document.querySelector(".popup_active");
-  const form = activePopup.querySelector(".form");
+  let form = activePopup.querySelector(".form");
   activePopup.classList.remove("popup_active");
   activePopup.removeEventListener("click", closeOnClickBackground);
   if (form) {
     form.reset();
-    const activeForm = new FormValidator(form, settings);
-    activeForm.resetValidation();
   }
   detachKeyListener();
 }
-const closeOnClickBackground = () => {
+const closeOnClickBackground = (event) => {
   if (event.target.classList.contains("popup_active")) {
     closePopup();
   }
@@ -187,8 +184,8 @@ function addCard(card) {
 }
 //Looping over the array in initialCards.js
 initialCards.forEach((card) => {
-  let CardElement = new Card(card, cardTemplate);
-  addCard(CardElement);
+  let cardElement = new Card(card, cardTemplate);
+  addCard(cardElement.createCard());
 });
 //<<END>> function to construct new cards followed by loop to run it on each item in initial array <<END>>
 //<<START>> Submission functions <<START>>
@@ -207,7 +204,8 @@ function submitPlace(e) {
     name: newPlace.value,
     link: newImageLink.value,
   };
-  addCard(new Card(newCard, cardTemplate));
+  const submitCard = new Card(newCard, cardTemplate)
+  addCard(submitCard.createCard());
   closePopup();
   e.target.removeEventListener("submit", submitPlace);
   e.target.reset();
@@ -248,6 +246,10 @@ addButton.addEventListener("click", openAdd); //add button listener
 
 //FormValidator activation
 const formList = Array.from(document.querySelectorAll(".form"));
-formList.forEach((form) => {
-  form = new FormValidator(form, settings);
+formList.forEach( form => {
+  form = new FormValidator(form, settings)
+  form.enableValidation();
 });
+//I decided to extend the FormDATA class with FormValidator, that way
+//I can not name arbitrary names to each form and they'll have the same behaviors.
+//This also lets me make resetValidation private and add it as a reset event listener.

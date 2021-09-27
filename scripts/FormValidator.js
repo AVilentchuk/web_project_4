@@ -1,50 +1,40 @@
 //FormValidator Class - > Added
-class FormValidator {
+class FormValidator extends FormData{
   constructor(formElement, settings) {
-    this.settings = settings;
-    this.formElement = formElement;
-    return this.enableValidation();
+    super();
+    this._settings = settings;
+    this._formElement = formElement;
   }
   //<<START>>public methods of form validation.<<START>>
   enableValidation() {
     return this._setEventListeners();
   }
 
-  resetValidation() {
-    this._unsetEventListeners();
-    this.inputList = this.formElement.querySelectorAll(".form__input");
-    this.inputList.forEach((input) => {
+  _resetValidation = () => {
+    const { inputStatus } = this._settings;
+    this._inputList.forEach((input) => {
       this._deactivateError(input);
-      if (input.classList.contains("form__input_status")) {
-        input.classList.remove("form__input_status");
-      }
+      input.classList.remove(`${inputStatus}`);
     });
-    this._setEventListeners(this.formElement);
-
-    const submitButton = this.formElement.querySelector(
-      `.${this.settings.submitSelector}`
-    );
-    !submitButton.classList.contains("button_disabled")
-      ? submitButton.classList.add("button_disabled")
-      : "";
-    return this.formElement;
-  };
+    this._controlSubmit(true);
+    return this._element;
+  }
   //<<END>>public methods of form validation.<<END>>
   //<<START>> Error messages and button controls <<START>>
   _deactivateError = (input) => {
     const errorField = input.nextElementSibling;
-    errorField.classList.remove(this.settings.inputErrorActive);
+    errorField.classList.remove(this._settings.inputErrorActive);
     errorField.textContent = "";
   };
   _activateError = (input, message) => {
     const errorField = input.nextElementSibling;
-    errorField.classList.add(this.settings.inputErrorActive);
+    errorField.classList.add(this._settings.inputErrorActive);
     errorField.textContent = message;
   };
   //Controls the status of the submit button, gets form inputs status from checkIfInputValid
   _controlSubmit = (formStatus) => {
-    const { submitSelector, disabledButton } = this.settings;
-    const submitButton = this.formElement.querySelector(`.${submitSelector}`);
+    const { submitSelector, disabledButton } = this._settings;
+    const submitButton = this._formElement.querySelector(`.${submitSelector}`);
 
     if (formStatus) {
       submitButton.classList.add(disabledButton);
@@ -56,42 +46,33 @@ class FormValidator {
   };
   _checkIfInputValid = () => {
     const input = event.target;
-    const inputList = Array.from(
-      this.formElement.querySelectorAll(`.${this.settings.formInput}`)
-    );
-    input.classList.add(this.settings.inputStatus);
-    !input.validity.valid
-      ? this._activateError(input, input.validationMessage)
-      : this._deactivateError(input);
+    input.classList.add(this._settings.inputStatus);
+    if (input.validity.valid) {
+      this._activateError(input, input.validationMessage);
+    } else {
+      this._deactivateError(input);
+    }
 
-    const formStatus = inputList.some((item) => !item.validity.valid);
+    const formStatus = this._inputList.some((item) => !item.validity.valid);
     return this._controlSubmit(formStatus);
   };
   //<<END>> Error messages control <<END>>
   //<<START>> Listeners control <<START>>
   _setEventListeners = () => {
-    this.formElement.addEventListener("submit", this._preventSubmitForm);
-    this.inputList = Array.from(
-      this.formElement.querySelectorAll(`.${this.settings.formInput}`)
+    const { formInput } = this._settings;
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(`.${formInput}`)
     );
-    this.inputList.forEach((input) => {
-      input.addEventListener("input", () => {
-        this._checkIfInputValid();
-      });
+    this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
     });
+    this._formElement.addEventListener("reset", this._resetValidation);
+    this._inputList.forEach((input) => {
+      input.addEventListener("input", this._checkIfInputValid);
+    });
+    return this._element;
   };
 
-  _unsetEventListeners = () => {
-    this.inputList = Array.from(
-      this.formElement.querySelectorAll(`.${this.settings.formInput}`)
-    );
-    this.inputList.forEach((input) => {
-      input.removeEventListener("input", this._checkIfInputValid);
-    });
-  };
-  _preventSubmitForm() {
-    event.preventDefault();
-  }
   //<<END>> Listeners control <<END>>
 }
 

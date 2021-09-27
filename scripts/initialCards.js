@@ -39,30 +39,6 @@ const initialCards = [
     name: "Kyoto, Japan",
     link: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
   },
-  // {
-  //   name: "Yosemite Valley",
-  //   link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  // },
-  // {
-  //   name: "Lake Louise",
-  //   link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  // },
-  // {
-  //   name: "Bald Mountains",
-  //   link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  // },
-  // {
-  //   name: "Latemar",
-  //   link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  // },
-  // {
-  //   name: "Vanoise National Park",
-  //   link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  // },
-  // {
-  //   name: "Lago di Braies",
-  //   link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  // },
 ];
 
 export {initialCards};
