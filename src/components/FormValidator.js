@@ -47,7 +47,7 @@ class FormValidator extends FormData{
   _checkIfInputValid = () => {
     const input = event.target;
     input.classList.add(this._settings.inputStatus);
-    if (input.validity.valid) {
+    if (!input.validity.valid) {
       this._activateError(input, input.validationMessage);
     } else {
       this._deactivateError(input);

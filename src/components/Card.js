@@ -1,12 +1,14 @@
-import { openImage } from "./index.js";
+
 const galleryText = document.querySelector(".popup__place-name");
 const galleryImage = document.querySelector(".popup__img");
+import {galleryPopup} from "../pages/index.js";
 
 export default class Card {
-  constructor({ name, link }, selectTemplate) {
+  constructor({ name, link }, selectTemplate, handleClickExtension) {
     this._text = name;
     this._link = link;
     this.selectTemplate = selectTemplate;
+    // this._handleImageClick = handleClickExtension;
   }
 
   _cloneTemplate() {
@@ -18,9 +20,10 @@ export default class Card {
     galleryText.textContent = this._text;
     galleryImage.src = this._link;
     galleryImage.alt = `Photograph of ${this._text}`;
-    openImage(this._element);
+    return galleryPopup.open(this._element);
   };
 
+// function (){addPopup.open()}, false
   _handleDelete = () => {
     this._element.remove();
     this._element = null;
