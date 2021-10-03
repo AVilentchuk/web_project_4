@@ -8,11 +8,6 @@
   transition:background .2s ease-in-out;
 }
 
-.card__like-button_active{
-  background:transparent url('../../../assets/icons/Union.svg') center no-repeat;
-}
-
 .card__like-button:hover {
-
   opacity: 0.5;
 }

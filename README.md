@@ -26,7 +26,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/AVilentchuk/">
-    <img src="assets/logo.png" alt="Logo" width="315">
+    <img src="src/assets/logo.png" alt="Logo" width="315">
   </a>
 
   <h3 align="center">Project 4: Around The U.S.</h3>
