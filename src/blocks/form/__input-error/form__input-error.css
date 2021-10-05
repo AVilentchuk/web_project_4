@@ -2,7 +2,7 @@
   position: absolute;
   margin-top: 5px;
   visibility: hidden;
-  width: 100%;
+  width: clamp(238px, 28vw, 358px);
   font-family: Inter;
   font-style: normal;
   font-weight: normal;

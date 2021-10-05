@@ -7,57 +7,71 @@ import PopupForm from "../components/PopupForm.js";
 import PopupGallery from "../components/PopupGallery.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo .js";
-import { settings, addButton, editButton, galleryWindow, addWindow, editProfileWindow, cardContainer, cardTemplate, newPlace, newImageLink } from "../scripts/constructs.js";
+import {
+  settings,
+  addButton,
+  editButton,
+  galleryWindow,
+  addWindow,
+  editProfileWindow,
+  cardContainer,
+  cardTemplate,
+  addForm,
+  editForm
+
+} from "../scripts/constructs.js";
 
 //Creates a userInfo object.
 const userInfo = new UserInfo(".profile__name", ".profile__job");
+//cardRendering function passed to section class for cardSection and new card creators.
+const cardRenderer = (newCard) => {
+  const cardElement = new Card(newCard, cardTemplate, (evt) => {
+    galleryPopup.open(evt);
+  });
+  const renderedCard = cardElement.createCard();
+  cardSection.addItem(renderedCard);
+};
 
-//enables formValidation throughout the document
-document.querySelectorAll(".form").forEach(form => {
-  form = new FormValidator(form, settings);
-  form.enableValidation();
-})
-//adds card section
-const cardSection = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = new Card(item, cardTemplate);
-    const renderedCard = cardElement.createCard();
-    cardSection.addItem(renderedCard);
-  }
-}, cardContainer, () => {
-  galleryPopup.open(renderedCard);
-
-});
-
-//renders card section
-cardSection.renderItems();
 //Creates the pop with the edit form
 const editPopup = new PopupForm(editProfileWindow, () => {
-
-  userInfo.setUserInfo(editPopup._getInputValues());
+  userInfo.setUserInfo(editPopup.getInputValues());
   editPopup.close();
-}
-);
+});
+editPopup.setEventListeners();
 
 //creates popup with form corresponding to add button with a callback function;
 const addPopup = new PopupForm(addWindow, () => {
-  const newCard = {
-    name: newPlace.value,
-    link: newImageLink.value,
-  };
-  const cardElement = new Card(newCard,
-    cardTemplate,
-    (evt) => PopupGallery.open(evt));
-
-  const renderedCard = cardElement.createCard();
-  cardSection.addItem(renderedCard);
+  const newCard = addPopup.getInputValues();
+  cardRenderer(newCard);
   addPopup.close();
 });
 
+addPopup.setEventListeners();
+
 //Creates the gallery popup
 const galleryPopup = new PopupGallery(galleryWindow);
+galleryPopup.setEventListeners();
 
+//form Validation
+const editValidator = new FormValidator(editForm,settings);
+editValidator.enableValidation();
+
+const addValidator = new FormValidator(addForm,settings);
+addValidator.enableValidation();
+
+//adds card section
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (newCard) => {
+      cardRenderer(newCard)
+    },
+  },
+  cardContainer
+);
+
+//renders card section
+cardSection.renderItems();
 
 //<<START>> base page button listeners <<START>>
 editButton.addEventListener("click", () => {
@@ -67,5 +81,4 @@ editButton.addEventListener("click", () => {
 addButton.addEventListener("click", () => addPopup.open()); //add button listener
 //<<END>> base page button listeners <<END>>
 
-//export to card so image click listener would work.
-export { galleryPopup };
+

@@ -10,9 +10,9 @@ export default class PopupGallery extends Popup {
     this._imageWindowName = this._popup.querySelector(".popup__place-name");
   }
 
-  open() {
+  open(evt) {
     super.open();
-    this._navigationAssign(event.target.parentNode);
+    this._navigationAssign(evt.target.parentNode);
   }
   _handleEscClose = (evt) => {
     switch (evt.code) {
@@ -26,6 +26,7 @@ export default class PopupGallery extends Popup {
         break;
       case "Escape":
         this.close();
+        super.unsetEventListeners();
         break;
       default:
         break;

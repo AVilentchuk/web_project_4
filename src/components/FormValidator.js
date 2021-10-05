@@ -1,7 +1,6 @@
 //FormValidator Class - > Added
-class FormValidator extends FormData{
+class FormValidator {
   constructor(formElement, settings) {
-    super();
     this._settings = settings;
     this._formElement = formElement;
   }
@@ -44,8 +43,8 @@ class FormValidator extends FormData{
       submitButton.removeAttribute("disabled");
     }
   };
-  _checkIfInputValid = () => {
-    const input = event.target;
+  _checkIfInputValid = (evt) => {
+    const input = evt.target;
     input.classList.add(this._settings.inputStatus);
     if (!input.validity.valid) {
       this._activateError(input, input.validationMessage);
