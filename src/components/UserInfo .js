@@ -14,5 +14,6 @@ export default class UserInfo {
     const {name, job} = newData;
     this._name.textContent = name;
     this._job.textContent = job;
+    this._data = newData;
   }
 }

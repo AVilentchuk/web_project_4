@@ -1,7 +1,3 @@
-const galleryText = document.querySelector(".popup__place-name");
-const galleryImage = document.querySelector(".popup__img");
-// import {galleryPopup} from "../pages/index.js";
-
 export default class Card {
   constructor({ name, link }, selectTemplate, handleClickExtension) {
     this._text = name;
@@ -16,9 +12,10 @@ export default class Card {
   }
 
   _handleImageClick = (evt) => {
-    galleryText.textContent = this._text;
-    galleryImage.src = this._link;
-    galleryImage.alt = `Photograph of ${this._text}`;
+    document.querySelector(".popup__place-name").textContent = this._text;
+    this._galleryWindow = document.querySelector(".popup__img");
+    this._galleryWindow.src = this._link;
+    this._galleryWindow.alt = `Photograph of ${this._text}`;
     this.handleClickExtension(evt);
   };
 
@@ -45,6 +42,7 @@ export default class Card {
   createCard = () => {
     this._element = this._cloneTemplate();
     this._assignEventListeners();
+
     const cardImage = this._element.querySelector(".card__image");
     cardImage.src = this._link;
     cardImage.alt = this._text;

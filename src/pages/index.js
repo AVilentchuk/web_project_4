@@ -29,6 +29,7 @@ const cardRenderer = (newCard) => {
     galleryPopup.open(evt);
   });
   const renderedCard = cardElement.createCard();
+
   cardSection.addItem(renderedCard);
 };
 
@@ -80,5 +81,23 @@ editButton.addEventListener("click", () => {
 }); //edit button listener
 addButton.addEventListener("click", () => addPopup.open()); //add button listener
 //<<END>> base page button listeners <<END>>
+
+const addImagePopup = new PopupWithForm(".popup_add-image", {
+  submitHandler: (imageData) => {
+    const newImageData = {
+      name: imageData.imageTitle,
+      link: imageData.imageLink
+    };
+      const newImageElement = new Card(newImageData, "#image-template",
+       { handleCardClick: openCardPopup });
+      imagesGenerator.addItem(newImageElement.generateCard());
+   }}
+);
+addImagePopup.setEventListeners();
+
+addImageBtn.addEventListener("click",()=> addImagePopup.open())
+
+
+
 
 

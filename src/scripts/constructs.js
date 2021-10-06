@@ -7,6 +7,9 @@ export const cardContainer = ".locations";
 export const editButton = document.querySelector(".profile__button-edit");
 export const addButton = document.querySelector(".profile__button-add");
 
+export const editForm = document.querySelector(editProfileWindow).querySelector(".form");
+export const addForm = document.querySelector(addWindow).querySelector(".form");
+
 export const settings = {
   formInput: "form__input",
   inputStatus: "form__input_status",
