@@ -15,7 +15,6 @@ export default class UserInfo {
   }
 
   setUserInfo(newData) {
-    console.log(newData);
     const { name, about, avatar, _id } = newData;
 
     this._name.textContent = name;
