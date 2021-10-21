@@ -14,16 +14,18 @@ export default class Popup {
     if (evt.code === "Escape") {
       this.close();
     }
-  }
+  };
 
   _handleBackgroundClose = (evt) => {
     if (evt.target.classList.contains("popup_active")) {
       this.close();
     }
-  }
+  };
   setEventListeners() {
-    this._popup.querySelector(".button_type_close").addEventListener("click", this.close.bind(this));
-    this._popup.addEventListener("click", this._handleBackgroundClose)
+    this._popup
+      .querySelector(".button_type_close")
+      .addEventListener("click", this.close.bind(this));
+    this._popup.addEventListener("click", this._handleBackgroundClose);
   }
   unsetEventListeners() {
     document.removeEventListener("keydown", this._handleEscClose);

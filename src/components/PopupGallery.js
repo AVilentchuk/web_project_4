@@ -12,23 +12,33 @@ export default class PopupGallery extends Popup {
 
   open(evt) {
     super.open();
-    const card = evt.target.parentNode;
-    const cardText = card.querySelector(".card__text");
-    const cardLink = card.querySelector(".card__image");
-    this._imageWindowName.textContent = cardText.textContent;
-    this._imageWindowPhoto.src = cardLink.src;
-    this._imageWindowPhoto.alt = `Photograph of ${cardText.textContent}`;
-    this._navigationAssign(card);
+    if (evt) {
+      const card = evt.target.parentNode;
+      const cardText = card.querySelector(".card__text");
+      const cardLink = card.querySelector(".card__image");
+      this._imageWindowName.textContent = cardText.textContent;
+      this._imageWindowPhoto.src = cardLink.src;
+      this._imageWindowPhoto.alt = `Photograph of ${cardText.textContent}`;
+      this._navigationAssign(card);
+    } else {
+      this._imageWindowPhoto.src =
+        document.querySelector(".profile__photo").src;
+      this._imageWindowPhoto.alt = "Profile photo";
+    }
   }
   _handleEscClose = (evt) => {
     switch (evt.code) {
       case "ArrowLeft":
+        if (this._leftArrow) {
           this._goLeft();
           this._toggleArrow(this._leftArrow);
+        }
         break;
       case "ArrowRight":
-         this._goRight();
+        if (this._rightArrow) {
+          this._goRight();
           this._toggleArrow(this._rightArrow);
+        }
         break;
       case "Escape":
         this.close();
@@ -36,25 +46,31 @@ export default class PopupGallery extends Popup {
       default:
         break;
     }
-  }
+  };
 
-   _navigationAssign = (card) => {
+  _navigationAssign = (card) => {
     //if conditions for exceptions of no sibling to go to start/end.
     this.card = card;
     this._leftCard = card.previousElementSibling || card.parentNode.lastChild;
     this._rightCard = card.nextElementSibling || card.parentNode.firstChild;
-  }
+  };
 
-   _goLeft() {
-    this._imageWindowPhoto.src = this._leftCard.querySelector(".card__image").src;
-    this._imageWindowPhoto.alt = this._leftCard.querySelector(".card__image").alt;
-    this._imageWindowName.textContent = this._leftCard.querySelector(".card__text").textContent;
+  _goLeft() {
+    this._imageWindowPhoto.src =
+      this._leftCard.querySelector(".card__image").src;
+    this._imageWindowPhoto.alt =
+      this._leftCard.querySelector(".card__image").alt;
+    this._imageWindowName.textContent =
+      this._leftCard.querySelector(".card__text").textContent;
     this._navigationAssign(this._leftCard); //sends data to navigation to update card location.
   }
-   _goRight()  {
-    this._imageWindowPhoto.src = this._rightCard.querySelector(".card__image").src;
-    this._imageWindowPhoto.alt = this._rightCard.querySelector(".card__image").alt;
-    this._imageWindowName.textContent = this._rightCard.querySelector(".card__text").textContent;
+  _goRight() {
+    this._imageWindowPhoto.src =
+      this._rightCard.querySelector(".card__image").src;
+    this._imageWindowPhoto.alt =
+      this._rightCard.querySelector(".card__image").alt;
+    this._imageWindowName.textContent =
+      this._rightCard.querySelector(".card__text").textContent;
     this._navigationAssign(this._rightCard); //sends data to navigation to update card location.
   }
   // toggles the Arrow animation by adding and removing css class and turning on transition for it's duration.
@@ -62,11 +78,18 @@ export default class PopupGallery extends Popup {
     e.classList.add("navigation-arrow_animated");
     const delayTime =
       parseFloat(getComputedStyle(e)["transitionDuration"]) * 1000;
-    setTimeout(() => e.classList.remove("navigation-arrow_animated"), delayTime);
+    setTimeout(
+      () => e.classList.remove("navigation-arrow_animated"),
+      delayTime
+    );
   }
-  setEventListeners(){
+  setEventListeners() {
     super.setEventListeners();
-    this._rightArrow.addEventListener("click", this._goRight.bind(this));
-    this._leftArrow.addEventListener("click", this._goLeft.bind(this));
+    if (this._leftArrow) {
+      if (this._rightArrow) {
+        this._rightArrow.addEventListener("click", this._goRight.bind(this));
+        this._leftArrow.addEventListener("click", this._goLeft.bind(this));
+      }
+    }
   }
 }

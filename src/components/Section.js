@@ -4,18 +4,18 @@ export default class Section {
     this._tenderer = renderer;
     this._container = document.querySelector(cardContainer);
   }
-  renderItems() {
-    this._items.forEach(item => {
-      this._tenderer(item);
-    });
+  renderItems(arrayOfItems) {
+    arrayOfItems
+      ? arrayOfItems.forEach((item) => this._tenderer(item))
+      : this._items.forEach((item) => this._tenderer(item));
   }
 
   //I did it so you can choose if you want to prepend or append the card element, default is prepend.
   addItem(element, attachAt) {
-    if (attachAt = 'prepend' || attachAt == undefined ) {
+    if (attachAt == "prepend" || attachAt == undefined) {
       this._container.prepend(element);
     } else {
-      if (attachAt == 'append') {
+      if (attachAt == "append") {
         this._container.append(element);
       }
     }
