@@ -1,4 +1,3 @@
-import { initialCards } from "../scripts/initialCards";
 const customFetch = (url, headers) => {
   fetch(url, headers);
 };

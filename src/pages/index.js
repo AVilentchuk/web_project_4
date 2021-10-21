@@ -26,7 +26,7 @@ import {
   editForm,
   editProfilePictureForm,
 } from "../scripts/constants.js";
-//laoder is a custom script I've created to process the button state while loading and finished.
+//loader is a custom script I've created to process the button state while loading and finished.
 //Liza from the educational team helped me to refactor it's code to be reusable.
 import { loader } from "./loader.js";
 //This is a function to determinate if the text in a card overflows and add tooltip accordingly.
@@ -71,6 +71,7 @@ const cardRenderer = (newCard) => {
     newCard,
     cardTemplate,
     (evt) => {
+
       galleryPopup.open(evt);
     },
     (id) => {
