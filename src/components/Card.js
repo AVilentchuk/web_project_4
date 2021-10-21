@@ -33,14 +33,10 @@ export default class Card {
   }
 
   _handleLike(res) {
-    console.log(this.likes.length, res.likes.length);
-
     if (this.likes !== res.likes) this.likes = res.likes;
     this.likeCounter.textContent = this.likes.length;
-    console.log(this.likes.length, res.likes.length);
-    this.likes.length === 0
-      ? (this.likeCounter.style.visibility = "hidden")
-      : (this.likeCounter.style.visibility = "visible");
+
+    this.likeCounter.style.visibility = this.likes.length ? "visible" : "hidden";
 
     this._element
       .querySelector(".card__like-button")

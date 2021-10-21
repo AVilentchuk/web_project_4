@@ -57,10 +57,14 @@ const userInfo = new UserInfo(
   ".profile__about",
   ".profile__photo"
 );
-//This updates the profile data with data from the server
-mainApi.getProfile().then((res) => {
-  userInfo.setUserInfo(res);
-});
+
+//This updates the page with from the server in a certain order
+Promise.all([mainApi.getProfile(), mainApi.getInitialCards()]).then(
+  ([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
+    cardSection.renderItems(initialCards);
+  }
+);
 
 //cardRendering function passed to section class for cardSection and new card creators.
 const confirmWindow = new PopupConfirm("#w-confirm");
@@ -71,7 +75,6 @@ const cardRenderer = (newCard) => {
     newCard,
     cardTemplate,
     (evt) => {
-
       galleryPopup.open(evt);
     },
     (id) => {
@@ -90,7 +93,6 @@ const cardRenderer = (newCard) => {
       });
     },
     (id) => {
-      console.log(userInfo._data._id);
       if (cardElement.likes.some((entry) => entry._id == userInfo._data._id)) {
         mainApi.dislikePhoto(id).then((res) => cardElement._handleLike(res));
       } else {
@@ -184,11 +186,6 @@ const cardSection = new Section(
   },
   cardContainer
 );
-
-//renders card section
-mainApi.getInitialCards().then((data) => {
-  cardSection.renderItems(data);
-});
 
 //<<START>> base page button listeners <<START>>
 editButton.addEventListener("click", () => {

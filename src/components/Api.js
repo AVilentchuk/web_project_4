@@ -1,43 +1,32 @@
-const customFetch = (url, headers) => {
-  fetch(url, headers);
+const customFetch = (url, properties) => {
+  return fetch(url, properties)
+    .then((response) => {
+      if (response.ok) return response.json();
+      return Promise.reject(
+        `Failed with status:( ${response.status} ${response.statusText})`
+      );
+    })
+    .catch((error) => console.log(error));
 };
+
 export default class Api {
   constructor({ groupId, apiKey, baseUrl }) {
     this.groupId = groupId;
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
   }
+
   getInitialCards() {
-    return fetch(`${this.baseUrl}${this.groupId}/cards`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/cards`, {
       headers: {
         authorization: `${this.apiKey}`,
+        "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(`Failed with status: ${response.status}`);
-      })
-      .then((data) => {
-        console.log(`Fetched ${data.length} cards successfully`);
-        return data;
-      })
-      .catch((error) => console.log(error));
-  }
-  refreshCard(cardId) {
-    return fetch(`${this.baseUrl}${this.groupId}/cards/likes/${cardId}`, {
-      headers: {
-        authorization: `${this.apiKey}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(`Failed with status: ${response.status}`);
-      })
-      .catch((error) => console.log(error));
+    });
   }
 
   postNewCard(cardData) {
-    return fetch(`${this.baseUrl}${this.groupId}/cards/`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/cards/`, {
       method: "POST",
       headers: {
         authorization: `${this.apiKey}`,
@@ -47,45 +36,28 @@ export default class Api {
         name: `${cardData.name}`,
         link: `${cardData.link}`,
       }),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) return response.json();
-        return Promise.reject(
-          `Failed with status:( ${response.status} ${response.statusText})`
-        );
-      })
-      .catch((error) => console.log(error));
+    });
   }
+
   deleteCardPost(cardId) {
-    return fetch(`${this.baseUrl}${this.groupId}/cards/${cardId}`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: `${this.apiKey}`,
       },
-    }).then((response) => {
-      if (response.ok) return response.json();
-      return Promise.reject(`Failed with status: ${response.status}`);
     });
   }
 
   getProfile() {
-    return fetch(`${this.baseUrl}${this.groupId}/users/me`, {
-      method: "GET",
+    return customFetch(`${this.baseUrl}${this.groupId}/users/me`, {
       headers: {
         authorization: `${this.apiKey}`,
       },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(`Failed with status: ${response.status}`);
-      })
-
-      .catch((error) => console.log(error));
+    });
   }
 
   updateProfile({ name, about }) {
-    return fetch(`${this.baseUrl}${this.groupId}/users/me`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: `${this.apiKey}`,
@@ -97,17 +69,11 @@ export default class Api {
         _id: `${this.apiKey}`,
         cohort: `${this.groupId}`,
       }),
-    }).then((response) => {
-      if (response.ok) return response.json();
-      else
-        return Promise.reject(
-          `Failed with status: ${response.status} \n ${response.response}`
-        );
     });
   }
 
   updateProfilePhoto(avatarLink) {
-    return fetch(`${this.baseUrl}${this.groupId}/users/me/avatar`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: `${this.apiKey}`,
@@ -116,33 +82,24 @@ export default class Api {
       body: JSON.stringify({
         avatar: `${avatarLink}`,
       }),
-    }).then((response) => {
-      if (response.ok) return response.json();
-      return Promise.reject(`Failed with status: ${response.status}`);
     });
   }
 
   likePhoto(cardId) {
-    return fetch(`${this.baseUrl}${this.groupId}/cards/likes/${cardId}`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
         authorization: `${this.apiKey}`,
       },
-    }).then((response) => {
-      if (response.ok) return response.json();
-      return Promise.reject(`Failed with status: ${response.status}`);
     });
   }
 
   dislikePhoto(cardId) {
-    return fetch(`${this.baseUrl}${this.groupId}/cards/likes/${cardId}`, {
+    return customFetch(`${this.baseUrl}${this.groupId}/cards/likes/${cardId}`, {
       method: "Delete",
       headers: {
         authorization: `${this.apiKey}`,
       },
-    }).then((response) => {
-      if (response.ok) return response.json();
-      return Promise.reject(`Failed with status: ${response.status}`);
     });
   }
 }
